@@ -1,29 +1,28 @@
-import express from 'express';
-import 'express-async-errors';
-import rateLimiter from 'express-rate-limit';
-import helmet from 'helmet';
-import hpp from 'hpp';
-import xss from './middleware/security/xss.js';
-import mongoSanitize from './middleware/security/mongoSanitize.js';
+import express from "express";
+import "express-async-errors";
+import rateLimiter from "express-rate-limit";
+import helmet from "helmet";
+import hpp from "hpp";
+import xss from "./middleware/security/xss.js";
+import mongoSanitize from "./middleware/security/mongoSanitize.js";
+import session from "express-session";
+import connectMongoSession from "connect-mongodb-session";
+import passport from "passport";
+import passportSetup from "./security/passportSetup.js";
+import flash from "connect-flash";
+import setLocals from "./middleware/session/storeLocals.js";
+import cookieParser from "cookie-parser";
+import csrf from "host-csrf";
+import wordRouter from "./routes/secretWord.js";
+import sessionsRouter from "./routes/sessions.js";
+import jobsRouter from "./routes/jobs.js";
+import authMiddleware from "./middleware/session/auth.js";
+import notFound from "./middleware/notFound.js";
+import errorHandlerMiddleware from "./middleware/errorHandler.js";
+import connectDatabase from "./db/connect.js";
+import dotenv from "dotenv";
 
-import session from 'express-session';
-import connectMongoSession from 'connect-mongodb-session';
-import passport from 'passport';
-import passportSetup from './security/passportSetup.js';
-import flash from 'connect-flash';
-import setLocals from './middleware/session/storeLocals.js';
-import cookieParser from 'cookie-parser';
-import csrf from 'host-csrf';
-
-import wordRouter from './routes/secretWord.js';
-import sessionsRouter from './routes/sessions.js';
-import jobsRouter from './routes/jobs.js';
-
-import authMiddleware from './middleware/session/auth.js';
-import notFound from './middleware/notFound.js';
-import errorHandlerMiddleware from './middleware/errorHandler.js';
-
-import connectDatabase from './db/connect.js';
+dotenv.config();
 
 const app = express();
 

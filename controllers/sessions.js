@@ -1,5 +1,5 @@
 import User from '../models/User.js';
-import parseVErr from '../utils/parseValidationErr.js';
+import parseVErr from '../util/parseValidationErr.js';
 
 export const registerShow = (req, res) => {
 	res.render('register');
